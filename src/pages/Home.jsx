@@ -5,11 +5,11 @@ import ChatWindow from "../components/chat/ChatWindow";
 export default function Home() {
   return (
     <div className="flex h-screen gap-3.5 ">
-      <div>
+      <div className="">
         <Sidebar />
       </div>
       
-      <div>
+      <div className='w-5/6 '>
         <ChatWindow />
       </div>
     </div>

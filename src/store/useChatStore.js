@@ -3,6 +3,7 @@ import { create } from "zustand";
 export const usechatstore = create((set,get)=>({
   chats:[],
   activechatid : null,
+  aimsg :"this from the ai",
 
   createchat : () =>{
     const newchat = {
@@ -41,7 +42,7 @@ export const usechatstore = create((set,get)=>({
 
   //store for the chat is finished
 
-  addchat : (text) =>{
+  addchat : (text, sender = "you") =>{
     const {activechatid} =get()
     if(!activechatid){
       return "there is no chat "
@@ -49,7 +50,8 @@ export const usechatstore = create((set,get)=>({
     let newmessage ={
       id:Date.now(),
       textmsg : text,
-      createdat : new Date
+      sender: sender,
+      createdAt: Date.now()
     };
 
     set(state => ({
