@@ -4,6 +4,10 @@ export const usechatstore = create((set,get)=>({
   chats:[],
   activechatid : null,
   aimsg :"this from the ai",
+  editmsgid:null,
+  delemsgid:null,
+  iseditingmsg:false,
+  isdeleting:false,
 
   createchat : () =>{
     const newchat = {
@@ -40,7 +44,7 @@ export const usechatstore = create((set,get)=>({
     }))
   },
 
-  //store for the chat is finished
+  
 
   addchat : (text, sender = "you") =>{
     const {activechatid} =get()
@@ -58,8 +62,50 @@ export const usechatstore = create((set,get)=>({
       chats: state.chats.map(c => c.id == activechatid ? {...c,messages:[...c.messages,newmessage]} : c)
     }))
 
+  },
+
+  startedit : (msgid) =>{
+    set({
+      editmsgid:msgid,
+      iseditingmsg:true
+    })
+  },
+
+  editmessage: (msgid,newtext) =>{
+    const {activechatid} = get()
+    set(state => ({
+      chats : state.chats.map(c => c.id == activechatid ? {...c,messages:c.messages.map(m => m.id == msgid ? {...m,textmsg:newtext} : m)} : c),
+      iseditingmsg:false
+    }))
+  },
+
+  stopedit:()=>{
+    set({
+      editmsgid : null,
+      iseditingmsg : false
+    })
+  },
+
+  startdelete : (msgid) =>{
+    set({
+      delemsgid:msgid,
+      isdeleting:true
+    })
+  },
+
+  stopdelete : () =>{
+    set({
+      delemsgid:null,
+      isdeleting:false
+    })
+  },
+
+  deletemsg : (msgid) =>{
+    set(state => ({
+      chats : state.chats.map(c => c.id == state.activechatid ? {...c,messages:c.messages.filter(m => m.id != msgid)} : c),
+      isdeleting:false
+    }))
   }
 
 }))
-
 
