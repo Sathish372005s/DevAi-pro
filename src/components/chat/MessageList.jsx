@@ -5,7 +5,7 @@ import Editpage from './Editpage.jsx';
 import Deletecomp from './Deletecomp.jsx';
 
 export default function MessageList() {
-  const { chats, activechatid, addchat ,editmsgid,startedit,editmessage,stopedit,iseditingmsg,isdeleting,startdelete,delemsgid} = usechatstore();
+  const { chats, activechatid, addchat ,editmsgid,startedit,editmessage,stopedit,iseditingmsg,isdeleting,startdelete,delemsgid,aimodel} = usechatstore();
 
   const activeChat = chats.find(chat => chat.id === activechatid);
   const messagesarray = activeChat?.messages || [];

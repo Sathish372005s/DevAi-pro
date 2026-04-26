@@ -8,6 +8,13 @@ export const usechatstore = create((set,get)=>({
   delemsgid:null,
   iseditingmsg:false,
   isdeleting:false,
+  aimodel: null,
+
+  setaimodel : (modelname)=>{
+    set({
+      aimodel:modelname
+    })
+  },
 
   createchat : () =>{
     const newchat = {
